@@ -11,11 +11,11 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private Animator animator;
     private readonly int hashMovement = Animator.StringToHash("moveSpeed");
-    [SerializeField] Transform playerVisual;
+    [SerializeField] private Transform playerVisual;
     [SerializeField] private Transform grabTranform;
     [SerializeField] XRRayInteractor rightHandInteractor;
-    [SerializeField] public InputActionProperty XRMoveAction;
-    [SerializeField] public InputActionProperty XRGrabAction;
+    [SerializeField] private InputActionProperty XRMoveAction;
+    [SerializeField] private InputActionProperty XRGrabAction;
     public Inventory inventory;
     [SerializeField] private InventoryUI inventoryUI;
     private void OnEnable()
