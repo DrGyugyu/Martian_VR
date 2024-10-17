@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine;
 
 public class Inventory
 {
@@ -8,6 +9,11 @@ public class Inventory
     public Inventory()
     {
         itemList = new List<Item>();
+        AddItem(new Item
+        {
+            itemSO = InventoryUI.Instance.solarPanelSO,
+            amount = 5
+        });
     }
     public void AddItem(Item item)
     {

@@ -3,7 +3,10 @@ guid: 9ea9e271e4cc9ffdd838528ee1c0b05f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - itemSlotTemplate: {fileID: 5168311993009967613, guid: 6af817e4379c5334dbacb2f362f308a5, type: 3}
+  - solarPanelSO: {fileID: 11400000, guid: a527116118b4186468e18257697cfe47, type: 2}
+  - itemSlotContainer: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

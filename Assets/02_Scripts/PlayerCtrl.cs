@@ -85,7 +85,6 @@ public class PlayerCtrl : MonoBehaviour
     {
         inventory = new Inventory();
         inventoryUI.SetInventory(inventory);
-        //playerVisual = Transform.FindFirstObjectByType<Transform>();
     }
     private void Update()
     {
@@ -93,5 +92,8 @@ public class PlayerCtrl : MonoBehaviour
         rotation.y = camera.transform.rotation.eulerAngles.y;
         playerVisual.rotation = Quaternion.Euler(rotation);
     }
-
+    public Inventory GetPlayerInventory()
+    {
+        return inventory;
+    }
 }
