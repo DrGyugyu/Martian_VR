@@ -6,4 +6,5 @@ public class ItemSO : ScriptableObject
     public ItemType itemType;
     public string itemName;
     public Sprite itemSprite;
+    public GameObject itemObj;
 }

@@ -15,3 +15,4 @@ MonoBehaviour:
   itemType: 1
   itemName: Solar Panel
   itemSprite: {fileID: 21300000, guid: 241dbf7beaf2bc04eb6ce96b1c7f6c60, type: 3}
+  itemObj: {fileID: 8737555423496696865, guid: 53a06eb67ee0d9347be051eb709d7dd1, type: 3}

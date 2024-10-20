@@ -22,8 +22,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         XRMoveAction.action.performed += (ctx) =>
         {
-            //Debug.Log(ctx.ReadValue<Vector2>());
-            animator.SetFloat(hashMovement, ctx.ReadValue<Vector2>().magnitude);
+            Vector2 moveInput = ctx.ReadValue<Vector2>();
+            animator.SetFloat(hashMovement, moveInput.magnitude * Mathf.Sign(moveInput.y));
         };
         XRMoveAction.action.canceled += (ctx) =>
         {
@@ -69,7 +69,7 @@ public class PlayerCtrl : MonoBehaviour
             grabbedObj.transform.parent = grabTranform;
             grabbedObj.transform.position = grabTranform.position;
             grabbedObj.transform.rotation = grabTranform.rotation;
-
+            grabbedObj.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
         }
         catch (Exception ex)
         {
@@ -83,17 +83,46 @@ public class PlayerCtrl : MonoBehaviour
     }
     private void Start()
     {
-        inventory = new Inventory();
+        inventory = new Inventory(UseItem);
         inventoryUI.SetInventory(inventory);
+        ItemWorld.SpawnItemWorld(new Vector3(0, 0, 5), new Item { itemSO = inventoryUI.solarPanelSO, amount = 4 });
+        ItemWorld.SpawnItemWorld(new Vector3(0, 0, 8), new Item { itemSO = inventoryUI.solarPanelSO, amount = 1 });
+        ItemWorld.SpawnItemWorld(Vector3.one * 2, new Item { itemSO = inventoryUI.pickAxSO, amount = 1 });
+
     }
     private void Update()
     {
         Vector3 rotation = playerVisual.rotation.eulerAngles;
         rotation.y = camera.transform.rotation.eulerAngles.y;
         playerVisual.rotation = Quaternion.Euler(rotation);
+        Debug.Log(inventory.GetItemList().Count);
     }
     public Inventory GetPlayerInventory()
     {
         return inventory;
     }
+    private void AddToInventory(ItemWorld itemWorld)
+    {
+        inventory.AddItem(itemWorld.GetItem());
+        itemWorld.DestroySelf();
+    }
+    private void UseItem(Item item)
+    {
+        switch (item.GetItemType())
+        {
+            case ItemType.MRE: break;
+            case ItemType.SolarPanel:
+                inventory.RemoveItem(new Item { itemSO = item.itemSO, amount = 1 });
+                break;
+            case ItemType.Rock: break;
+            case ItemType.Ore: break;
+        }
+    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.TryGetComponent(out ItemWorld itemWorld))
+    //     {
+    //         AddToInventory(itemWorld);
+    //     }
+    // }
 }

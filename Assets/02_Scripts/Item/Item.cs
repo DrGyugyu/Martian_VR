@@ -12,6 +12,10 @@ public struct Item
     {
         return itemSO.itemSprite;
     }
+    public GameObject GetItemObj()
+    {
+        return itemSO.itemObj;
+    }
     public override string ToString()
     {
         return itemSO.itemName;
