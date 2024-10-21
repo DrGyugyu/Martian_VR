@@ -64,11 +64,12 @@ public class PlayerCtrl : MonoBehaviour
         {
             await Task.Delay(10);
             XRGrabInteractable grabbedObj = rightHandInteractor.interactablesSelected[0] as XRGrabInteractable;
-            grabbedObj.GetComponent<XRGrabInteractable>().enabled = false;
+            //grabbedObj.GetComponent<XRGrabInteractable>().enabled = false;
             grabbedObj.GetComponent<Rigidbody>().isKinematic = true;
-            grabbedObj.transform.parent = grabTranform;
-            grabbedObj.transform.position = grabTranform.position;
-            grabbedObj.transform.rotation = grabTranform.rotation;
+            grabbedObj.GetComponent<ItemWorld>().GetItemText().enabled = false;
+            // grabbedObj.transform.parent = grabTranform;
+            // grabbedObj.transform.position = grabTranform.position;
+            // grabbedObj.transform.rotation = grabTranform.rotation;
             grabbedObj.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
         }
         catch (Exception ex)
@@ -77,9 +78,24 @@ public class PlayerCtrl : MonoBehaviour
         }
         //grabbedObject?.gameObject.transform.
     }
-    private void OnRelease(InputAction.CallbackContext ctx)
+    private async Task OnRelease(InputAction.CallbackContext ctx)
     {
-
+        try
+        {
+            await Task.Delay(10);
+            XRGrabInteractable grabbedObj = rightHandInteractor.interactablesSelected[0] as XRGrabInteractable;
+            //grabbedObj.GetComponent<XRGrabInteractable>().enabled = false;
+            grabbedObj.GetComponent<Rigidbody>().isKinematic = false;
+            grabbedObj.GetComponent<ItemWorld>().GetItemText().enabled = true;
+            // grabbedObj.transform.parent = grabTranform;
+            // grabbedObj.transform.position = grabTranform.position;
+            // grabbedObj.transform.rotation = grabTranform.rotation;
+            grabbedObj.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError(ex.ToString());
+        }
     }
     private void Start()
     {

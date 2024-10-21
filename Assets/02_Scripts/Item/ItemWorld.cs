@@ -37,4 +37,8 @@ public class ItemWorld : MonoBehaviour
         // itemWorld.GetComponent<Rigidbody>().AddForce(2 * Vector3.one * forcedir, ForceMode.Impulse);
         return itemWorld;
     }
+    public TextMeshPro GetItemText()
+    {
+        return itemText;
+    }
 }
