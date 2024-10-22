@@ -1333,7 +1333,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1831307678
@@ -5136,7 +5136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Mediator: {fileID: 5397635484949369210}
-  m_TransformationPriority: 0
+  m_TransformationPriority: 1
   m_DelayTime: 1
 --- !u!1 &8321960318607544716
 GameObject:
