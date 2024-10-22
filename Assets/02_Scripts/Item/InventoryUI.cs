@@ -43,18 +43,6 @@ public class InventoryUI : MonoBehaviour
             GameObject newItemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
             newItemSlot.transform.Find("IconImg").GetComponent<Image>().sprite = item.GetSprite();
             newItemSlot.GetComponentInChildren<TextMeshProUGUI>().text = item.amount.ToString();
-            newItemSlot.GetComponent<ButtonUI>().ClickFunc = () =>
-            {
-                //Use Item
-                inventory.UseItem(item);
-            };
-            newItemSlot.GetComponent<ButtonUI>().MouseRightClickFunc = () =>
-            {
-                //Drop Item
-                ItemWorld.DropItem(playerCtrl.transform.position, item);
-                inventory.RemoveItem(item);
-            };
-
         }
     }
 }

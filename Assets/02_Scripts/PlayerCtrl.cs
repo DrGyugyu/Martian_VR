@@ -84,12 +84,12 @@ public class PlayerCtrl : MonoBehaviour
         {
             await Task.Delay(10);
             XRGrabInteractable grabbedObj = rightHandInteractor.interactablesSelected[0] as XRGrabInteractable;
-            //grabbedObj.GetComponent<XRGrabInteractable>().enabled = false;
+            grabbedObj.GetComponent<XRGrabInteractable>().enabled = false;
             grabbedObj.GetComponent<Rigidbody>().isKinematic = false;
             grabbedObj.GetComponent<ItemWorld>().GetItemText().enabled = true;
-            // grabbedObj.transform.parent = grabTranform;
-            // grabbedObj.transform.position = grabTranform.position;
-            // grabbedObj.transform.rotation = grabTranform.rotation;
+            grabbedObj.transform.parent = grabTranform;
+            grabbedObj.transform.position = grabTranform.position;
+            grabbedObj.transform.rotation = grabTranform.rotation;
             grabbedObj.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
         }
         catch (Exception ex)
@@ -99,7 +99,7 @@ public class PlayerCtrl : MonoBehaviour
     }
     private void Start()
     {
-        inventory = new Inventory(UseItem);
+        inventory = new Inventory();
         inventoryUI.SetInventory(inventory);
         ItemWorld.SpawnItemWorld(new Vector3(0, 0, 5), new Item { itemSO = inventoryUI.solarPanelSO, amount = 4 });
         ItemWorld.SpawnItemWorld(new Vector3(0, 0, 8), new Item { itemSO = inventoryUI.solarPanelSO, amount = 1 });
@@ -111,7 +111,6 @@ public class PlayerCtrl : MonoBehaviour
         Vector3 rotation = playerVisual.rotation.eulerAngles;
         rotation.y = camera.transform.rotation.eulerAngles.y;
         playerVisual.rotation = Quaternion.Euler(rotation);
-        Debug.Log(inventory.GetItemList().Count);
     }
     public Inventory GetPlayerInventory()
     {
@@ -122,23 +121,12 @@ public class PlayerCtrl : MonoBehaviour
         inventory.AddItem(itemWorld.GetItem());
         itemWorld.DestroySelf();
     }
-    private void UseItem(Item item)
+
+    private void OnTriggerEnter(Collider other)
     {
-        switch (item.GetItemType())
+        if (other.TryGetComponent(out ItemWorld itemWorld))
         {
-            case ItemType.MRE: break;
-            case ItemType.SolarPanel:
-                inventory.RemoveItem(new Item { itemSO = item.itemSO, amount = 1 });
-                break;
-            case ItemType.Rock: break;
-            case ItemType.Ore: break;
+            AddToInventory(itemWorld);
         }
     }
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.TryGetComponent(out ItemWorld itemWorld))
-    //     {
-    //         AddToInventory(itemWorld);
-    //     }
-    // }
 }
