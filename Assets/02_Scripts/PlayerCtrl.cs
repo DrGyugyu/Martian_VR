@@ -16,7 +16,6 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] XRRayInteractor rightHandInteractor;
     [SerializeField] private InputActionProperty XRMoveAction;
     [SerializeField] private InputActionProperty XRGrabAction;
-    public Inventory inventory;
     [SerializeField] private InventoryUI inventoryUI;
     private void OnEnable()
     {
@@ -64,12 +63,12 @@ public class PlayerCtrl : MonoBehaviour
         {
             await Task.Delay(10);
             XRGrabInteractable grabbedObj = rightHandInteractor.interactablesSelected[0] as XRGrabInteractable;
-            //grabbedObj.GetComponent<XRGrabInteractable>().enabled = false;
+            grabbedObj.GetComponent<XRGrabInteractable>().enabled = false;
             grabbedObj.GetComponent<Rigidbody>().isKinematic = true;
             grabbedObj.GetComponent<ItemWorld>().GetItemText().enabled = false;
-            // grabbedObj.transform.parent = grabTranform;
-            // grabbedObj.transform.position = grabTranform.position;
-            // grabbedObj.transform.rotation = grabTranform.rotation;
+            grabbedObj.transform.parent = grabTranform;
+            grabbedObj.transform.position = grabTranform.position;
+            grabbedObj.transform.rotation = grabTranform.rotation;
             grabbedObj.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
         }
         catch (Exception ex)
@@ -97,31 +96,17 @@ public class PlayerCtrl : MonoBehaviour
             Debug.LogError(ex.ToString());
         }
     }
-    private void Start()
-    {
-        inventory = new Inventory();
-        inventoryUI.SetInventory(inventory);
-        ItemWorld.SpawnItemWorld(new Vector3(0, 0, 5), new Item { itemSO = inventoryUI.solarPanelSO, amount = 4 });
-        ItemWorld.SpawnItemWorld(new Vector3(0, 0, 8), new Item { itemSO = inventoryUI.solarPanelSO, amount = 1 });
-        ItemWorld.SpawnItemWorld(Vector3.one * 2, new Item { itemSO = inventoryUI.pickAxSO, amount = 1 });
-
-    }
     private void Update()
     {
         Vector3 rotation = playerVisual.rotation.eulerAngles;
         rotation.y = camera.transform.rotation.eulerAngles.y;
         playerVisual.rotation = Quaternion.Euler(rotation);
     }
-    public Inventory GetPlayerInventory()
-    {
-        return inventory;
-    }
     private void AddToInventory(ItemWorld itemWorld)
     {
-        inventory.AddItem(itemWorld.GetItem());
+        GameMgr.Instance.GetInventoryOrigin().AddItem(itemWorld.GetItem());
         itemWorld.DestroySelf();
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out ItemWorld itemWorld))

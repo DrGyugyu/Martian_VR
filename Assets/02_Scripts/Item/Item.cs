@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+[Serializable]
 public struct Item
 {
     public ItemSO itemSO;
@@ -20,11 +21,10 @@ public struct Item
     {
         return itemSO.itemName;
     }
-
 }
 public enum ItemType
 {
-    MRE,
+    Burger,
     SolarPanel,
     Rock,
     Ore

@@ -9,7 +9,6 @@ public class InventoryUI : MonoBehaviour
     public GameObject itemSlotTemplate;
     public ItemSO solarPanelSO;
     public ItemSO pickAxSO;
-    public ItemSO MRESO;
     public ItemSO rockSO;
     public ItemSO oreSO;
     [SerializeField] private PlayerCtrl playerCtrl;
