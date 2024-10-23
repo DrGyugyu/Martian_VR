@@ -4,12 +4,14 @@ using System.Linq;
 public class Inventory
 {
     public event Action<Item> OnItemListChanged;
-    public event Action OnDailyMissionComplete;
+    public event Action<int> OnDailyMissionComplete;
     private List<Item> itemList;
     private List<Item> missionItemList;
-    public Inventory(List<Item> missionItemList)
+    private int day;
+    public Inventory(List<Item> missionItemList, int day)
     {
         this.missionItemList = missionItemList;
+        this.day = day;
         itemList = new List<Item>();
     }
     public void AddItem(Item item)
@@ -26,7 +28,7 @@ public class Inventory
         OnItemListChanged?.Invoke(item);
         if (itemList.All(missionItem => missionItemList.Any(item => item.GetItemType() == missionItem.GetItemType() && item.amount >= missionItem.amount)))
         {
-            OnDailyMissionComplete?.Invoke();
+            OnDailyMissionComplete?.Invoke(day);
         }
     }
     public List<Item> GetItemList()
