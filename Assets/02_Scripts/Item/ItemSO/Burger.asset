@@ -15,4 +15,4 @@ MonoBehaviour:
   itemType: 0
   itemName: Burger
   itemSprite: {fileID: 21300000, guid: c39742e5425aaf046a796788a36d09b7, type: 3}
-  itemObj: {fileID: 7247123331921222052, guid: 7bf9d59bfd58ca749b19a7e1d9ee46ca, type: 3}
+  itemObj: {fileID: 7247123331921222052, guid: ed32c8da25df9b35bbfc83d8d0d40667, type: 3}

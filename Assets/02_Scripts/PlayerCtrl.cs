@@ -71,7 +71,6 @@ public class PlayerCtrl : MonoBehaviour
             XRGrabInteractable grabbedObj = rightHandInteractor.interactablesSelected[0] as XRGrabInteractable;
             grabbedObj.GetComponent<XRGrabInteractable>().enabled = false;
             grabbedObj.GetComponent<Rigidbody>().isKinematic = true;
-            grabbedObj.GetComponent<ItemWorld>().GetItemText().enabled = false;
             grabbedObj.transform.parent = grabTranform;
             grabbedObj.transform.position = grabTranform.position;
             grabbedObj.transform.rotation = grabTranform.rotation;
@@ -91,7 +90,6 @@ public class PlayerCtrl : MonoBehaviour
             XRGrabInteractable grabbedObj = rightHandInteractor.interactablesSelected[0] as XRGrabInteractable;
             grabbedObj.GetComponent<XRGrabInteractable>().enabled = false;
             grabbedObj.GetComponent<Rigidbody>().isKinematic = false;
-            grabbedObj.GetComponent<ItemWorld>().GetItemText().enabled = true;
             grabbedObj.transform.parent = grabTranform;
             grabbedObj.transform.position = grabTranform.position;
             grabbedObj.transform.rotation = grabTranform.rotation;

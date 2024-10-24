@@ -1,7 +1,5 @@
-using System;
+using Photon.Pun;
 using TMPro;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemWorld : MonoBehaviour
@@ -10,7 +8,7 @@ public class ItemWorld : MonoBehaviour
     [SerializeField] private TextMeshPro itemText;
     public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
-        GameObject itemSpawn = Instantiate(item.GetItemObj(), position, Quaternion.identity);
+        GameObject itemSpawn = PhotonNetwork.Instantiate(item.GetItemObj().name, position, Quaternion.identity);
         ItemWorld itemWorld = itemSpawn.GetComponent<ItemWorld>();
         itemWorld.SetItem(item);
         return itemWorld;

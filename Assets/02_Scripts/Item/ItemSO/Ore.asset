@@ -15,4 +15,4 @@ MonoBehaviour:
   itemType: 3
   itemName: Ore
   itemSprite: {fileID: 21300000, guid: 6b8c41812748e70498f0aa474249a91c, type: 3}
-  itemObj: {fileID: 1312877713528143078, guid: 0d62913180846cbc69a3d4a9d18c8841, type: 3}
+  itemObj: {fileID: 1312877713528143078, guid: 9a74059ecba29be6094f2dae03074fd3, type: 3}

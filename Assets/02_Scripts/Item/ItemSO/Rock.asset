@@ -15,4 +15,4 @@ MonoBehaviour:
   itemType: 2
   itemName: Rock
   itemSprite: {fileID: 21300000, guid: e15f16bffa7eb7541a13462216baa98d, type: 3}
-  itemObj: {fileID: 4242189187640267125, guid: 085539b916cbfbd42b2acd70de22213e, type: 3}
+  itemObj: {fileID: 4242189187640267125, guid: b0e07e57648522bfcba6d4137251b807, type: 3}

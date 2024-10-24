@@ -1105,11 +1105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471fcb8dc6b26ec29b37fe6d9f5d76ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
   pc_Renderer: {fileID: 11400000, guid: f288ae1f4751b564a96ac7587541f7a2, type: 2}
-  canvas: {fileID: 0}
-  dailyMissionText: {fileID: 0}
-  inventoryUI: {fileID: 0}
   day1Items:
   - itemSO: {fileID: 11400000, guid: a527116118b4186468e18257697cfe47, type: 2}
     amount: 3
@@ -1125,7 +1121,7 @@ MonoBehaviour:
   - itemSO: {fileID: 11400000, guid: b46e87004dbc6094f8285b2357a04e4c, type: 2}
     amount: 6
   - itemSO: {fileID: 11400000, guid: a527116118b4186468e18257697cfe47, type: 2}
-    amount: 2
+    amount: 1
   day3Items:
   - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
     amount: 6
@@ -1214,6 +1210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 755938207}
   - component: {fileID: 755938206}
+  - component: {fileID: 755938208}
   m_Layer: 0
   m_Name: ItemSpawner
   m_TagString: Untagged
@@ -1241,67 +1238,67 @@ MonoBehaviour:
   - itemSO: {fileID: 11400000, guid: a527116118b4186468e18257697cfe47, type: 2}
     amount: 3
   - itemSO: {fileID: 11400000, guid: bffe86d39ca15e147a4d5809d2304fc5, type: 2}
-    amount: 1
-  - itemSO: {fileID: 11400000, guid: bffe86d39ca15e147a4d5809d2304fc5, type: 2}
-    amount: 1
-  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
-    amount: 3
+    amount: 2
   - itemSO: {fileID: 11400000, guid: bffe86d39ca15e147a4d5809d2304fc5, type: 2}
     amount: 1
   - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
     amount: 1
   - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
     amount: 2
+  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
+    amount: 2
+  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
+    amount: 3
+  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
+    amount: 3
   - itemSO: {fileID: 11400000, guid: a527116118b4186468e18257697cfe47, type: 2}
-    amount: 1
-  - itemSO: {fileID: 11400000, guid: a527116118b4186468e18257697cfe47, type: 2}
-    amount: 1
+    amount: 3
   day2SpawnItemList:
   - itemSO: {fileID: 11400000, guid: a527116118b4186468e18257697cfe47, type: 2}
     amount: 2
   - itemSO: {fileID: 11400000, guid: a527116118b4186468e18257697cfe47, type: 2}
     amount: 2
-  - itemSO: {fileID: 11400000, guid: a527116118b4186468e18257697cfe47, type: 2}
-    amount: 2
   - itemSO: {fileID: 11400000, guid: 6a5005867b6486a45a40438f5df84b63, type: 2}
     amount: 2
   - itemSO: {fileID: 11400000, guid: 6a5005867b6486a45a40438f5df84b63, type: 2}
-    amount: 1
+    amount: 3
   - itemSO: {fileID: 11400000, guid: b46e87004dbc6094f8285b2357a04e4c, type: 2}
-    amount: 1
+    amount: 4
+  - itemSO: {fileID: 11400000, guid: 6a5005867b6486a45a40438f5df84b63, type: 2}
+    amount: 5
+  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
+    amount: 5
+  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
+    amount: 6
+  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
+    amount: 4
   - itemSO: {fileID: 11400000, guid: b46e87004dbc6094f8285b2357a04e4c, type: 2}
-    amount: 2
+    amount: 5
   - itemSO: {fileID: 11400000, guid: b46e87004dbc6094f8285b2357a04e4c, type: 2}
-    amount: 3
-  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
-    amount: 3
-  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
-    amount: 3
-  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
-    amount: 3
+    amount: 6
   day3SpawnItemList:
   - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
+    amount: 1
+  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
     amount: 2
   - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
+    amount: 1
+  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
+    amount: 2
+  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
+    amount: 1
+  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
     amount: 2
   - itemSO: {fileID: 11400000, guid: 6a5005867b6486a45a40438f5df84b63, type: 2}
-    amount: 1
+    amount: 2
   - itemSO: {fileID: 11400000, guid: 6a5005867b6486a45a40438f5df84b63, type: 2}
-    amount: 1
+    amount: 2
   - itemSO: {fileID: 11400000, guid: 6a5005867b6486a45a40438f5df84b63, type: 2}
-    amount: 1
+    amount: 2
   - itemSO: {fileID: 11400000, guid: 6a5005867b6486a45a40438f5df84b63, type: 2}
-    amount: 1
-  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
-    amount: 1
-  - itemSO: {fileID: 11400000, guid: 0c134a336334998408ffa916257a60f5, type: 2}
-    amount: 1
+    amount: 2
   - itemSO: {fileID: 11400000, guid: 6a5005867b6486a45a40438f5df84b63, type: 2}
-    amount: 1
-  - itemSO: {fileID: 11400000, guid: 6a5005867b6486a45a40438f5df84b63, type: 2}
-    amount: 1
-  - itemSO: {fileID: 11400000, guid: 6a5005867b6486a45a40438f5df84b63, type: 2}
-    amount: 1
+    amount: 2
   spawnLocTr:
   - {fileID: 485668550}
   - {fileID: 2019340974}
@@ -1329,6 +1326,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1504201056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &755938208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755938205}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &757784371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3085,6 +3104,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2144489015}
     m_Modifications:
+    - target: {fileID: 2001120390373312519, guid: 5e264a7c7699c3f48972a247d48aa0f1, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3053721543050850839, guid: 5e264a7c7699c3f48972a247d48aa0f1, type: 3}
       propertyPath: m_Name
       value: OrePrefab

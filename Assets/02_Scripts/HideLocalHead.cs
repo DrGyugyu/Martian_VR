@@ -1,16 +1,22 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class HideLocalHead : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Transform localHead;
+    private void Awake()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    }
+    private void Start()
     {
-        
+        PhotonView photonView = GetComponent<PhotonView>();
+        if (photonView.IsMine)
+        {
+            if (localHead != null)
+            {
+                localHead.gameObject.SetActive(false);
+            }
+        }
     }
 }
