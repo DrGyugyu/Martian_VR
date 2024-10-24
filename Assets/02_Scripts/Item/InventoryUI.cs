@@ -7,6 +7,7 @@ public class InventoryUI : MonoBehaviour
 {
     private Inventory inventory;
     public GameObject itemSlotTemplate;
+    public ItemSO burgerSO;
     public ItemSO solarPanelSO;
     public ItemSO pickAxSO;
     public ItemSO rockSO;

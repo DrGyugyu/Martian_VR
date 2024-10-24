@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08388a68b8fd19d3a9a7e5010579624, type: 3}
   m_Name: PickAx
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 4
   itemName: Pick Ax
   itemSprite: {fileID: 21300000, guid: 2039b06b9cb0c3e2fbbf4bf73d8ef95e, type: 3}
   itemObj: {fileID: 6670940584873956019, guid: eb3a8014775724a3b8077ff7ea3281b2, type: 3}

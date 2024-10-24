@@ -17,6 +17,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private InputActionProperty XRMoveAction;
     [SerializeField] private InputActionProperty XRGrabAction;
     [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
     private void OnEnable()
     {
         XRMoveAction.action.performed += (ctx) =>
@@ -57,6 +58,11 @@ public class PlayerCtrl : MonoBehaviour
             OnRelease(ctx);
         };
     }
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     private async Task OnGrab(InputAction.CallbackContext ctx)
     {
         try
@@ -114,4 +120,5 @@ public class PlayerCtrl : MonoBehaviour
             AddToInventory(itemWorld);
         }
     }
+
 }

@@ -9,6 +9,7 @@ using UnityEngine.Rendering.Universal;
 
 public class GameMgr : MonoBehaviour
 {
+    public static CharacterController playerCharacterCtrl;
     [SerializeField] private Camera camera;
     [SerializeField] UniversalRendererData pc_Renderer;
     private FullScreenPassRendererFeature fullScreenPassRendererFeature;
@@ -29,15 +30,15 @@ public class GameMgr : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(Instance);
         }
     }
     private void Start()
     {
+        playerCharacterCtrl.enabled = true;
         dailyItemListArr = new List<Item>[3] { day1Items, day2Items, day3Items };
         fullScreenPassRendererFeature = (FullScreenPassRendererFeature)pc_Renderer.rendererFeatures[0];
     }
-    private void StartDay(int day)
+    public void StartDay(int day)
     {
         if (day > 3) return;
         ItemSpawner.Instance.SpawnDailyItems(day);

@@ -18,10 +18,11 @@ public class ItemSpawner : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(Instance);
         }
+        dailySpawnItemListArr = new List<Item>[3] { day1SpawnItemList, day2SpawnItemList, day3SpawnItemList };
     }
     private void Start()
     {
-        dailySpawnItemListArr = new List<Item>[3] { day1SpawnItemList, day2SpawnItemList, day3SpawnItemList };
+        GameMgr.Instance.StartDay(1);
     }
     public void SpawnDailyItems(int day)
     {

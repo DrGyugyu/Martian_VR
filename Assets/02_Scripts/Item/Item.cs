@@ -27,5 +27,6 @@ public enum ItemType
     Burger,
     SolarPanel,
     Rock,
-    Ore
+    Ore,
+    PickAx
 }

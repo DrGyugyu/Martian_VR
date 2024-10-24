@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1684170281293729757}
   - component: {fileID: 5619543547871827531}
   - component: {fileID: 5813875368962320296}
+  - component: {fileID: 8678935897334356873}
   m_Layer: 0
   m_Name: OreItem
   m_TagString: Untagged
@@ -252,6 +253,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemText: {fileID: 7563684617061699923}
+--- !u!64 &8678935897334356873
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312877713528143078}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -9079924993001236642, guid: 37f0349aa3875144aba4b78912f67c28, type: 3}
 --- !u!1 &3363148436698986464
 GameObject:
   m_ObjectHideFlags: 0
