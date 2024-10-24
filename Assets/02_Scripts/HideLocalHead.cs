@@ -15,7 +15,7 @@ public class HideLocalHead : MonoBehaviour
         {
             if (localHead != null)
             {
-                localHead.gameObject.SetActive(false);
+                localHead.localScale = Vector3.zero;
             }
         }
     }

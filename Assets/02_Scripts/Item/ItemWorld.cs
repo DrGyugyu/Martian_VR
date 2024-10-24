@@ -24,17 +24,16 @@ public class ItemWorld : MonoBehaviour
     }
     public void DestroySelf()
     {
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
-
-    public static ItemWorld DropItem(Vector3 playerPos, Item item)
-    {
-        Vector3 dropPos = playerPos - Vector3.forward;
-        ItemWorld itemWorld = SpawnItemWorld(dropPos, item);
-        // int forcedir = 2 * UnityEngine.Random.Range(0, 2) - 1;
-        // itemWorld.GetComponent<Rigidbody>().AddForce(2 * Vector3.one * forcedir, ForceMode.Impulse);
-        return itemWorld;
-    }
+    // public static ItemWorld DropItem(Vector3 playerPos, Item item)
+    // {
+    //     Vector3 dropPos = playerPos - Vector3.forward;
+    //     ItemWorld itemWorld = SpawnItemWorld(dropPos, item);
+    //     // int forcedir = 2 * UnityEngine.Random.Range(0, 2) - 1;
+    //     // itemWorld.GetComponent<Rigidbody>().AddForce(2 * Vector3.one * forcedir, ForceMode.Impulse);
+    //     return itemWorld;
+    // }
     public TextMeshPro GetItemText()
     {
         return itemText;

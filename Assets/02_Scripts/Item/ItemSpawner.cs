@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
@@ -21,10 +22,12 @@ public class ItemSpawner : MonoBehaviour
     private void Start()
     {
         dailySpawnItemListArr = new List<Item>[3] { day1SpawnItemList, day2SpawnItemList, day3SpawnItemList };
+        Debug.Log(dailySpawnItemListArr.Length);
     }
     public void SpawnDailyItems(int day)
     {
         ShuffleTrArray(spawnLocTr);
+        Debug.Log(day);//+ dailySpawnItemListArr[day - 1].Count);
         for (int i = 0; i < dailySpawnItemListArr[day - 1].Count; i++)
         {
             ItemWorld.SpawnItemWorld(spawnLocTr[i].position, dailySpawnItemListArr[day - 1][i]);
@@ -45,7 +48,7 @@ public class ItemSpawner : MonoBehaviour
         ItemWorld[] itemGameObj = FindObjectsOfType<ItemWorld>();
         foreach (var item in itemGameObj)
         {
-            Destroy(item.gameObject);
+            PhotonNetwork.Destroy(item.gameObject);
         }
     }
 }

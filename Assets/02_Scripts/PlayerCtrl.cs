@@ -18,6 +18,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private InputActionProperty XRGrabAction;
     [SerializeField] private InventoryUI inventoryUI;
     [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] private Material[] playerMaterials;
     private void OnEnable()
     {
         XRMoveAction.action.performed += (ctx) =>
@@ -33,9 +34,9 @@ public class PlayerCtrl : MonoBehaviour
         {
             await OnGrab(ctx);
         };
-        XRGrabAction.action.canceled += (ctx) =>
+        XRGrabAction.action.canceled += async (ctx) =>
         {
-            OnRelease(ctx);
+            await OnRelease(ctx);
         };
     }
     private void OnDisable()
@@ -61,6 +62,7 @@ public class PlayerCtrl : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        skinnedMeshRenderer.material = playerMaterials[UnityEngine.Random.Range(0, playerMaterials.Length)];
     }
 
     private async Task OnGrab(InputAction.CallbackContext ctx)

@@ -2,10 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Photon.Pun;
 using TMPro;
+using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameMgr : MonoBehaviour
 {
@@ -18,10 +22,14 @@ public class GameMgr : MonoBehaviour
     public static ColorAdjustments colorAdjustments;
     private Inventory inventory;
     public static InventoryUI inventoryUI;
+    public static GameObject player;
     [SerializeField] private List<Item> day1Items;
     [SerializeField] private List<Item> day2Items;
     [SerializeField] private List<Item> day3Items;
     private List<Item>[] dailyItemListArr;
+    public static Canvas gameClearCanvas;
+    public static Button gameClearBtn;
+    private Button leaveBtn;
     public static GameMgr Instance;
     private void Awake()
     {
@@ -39,16 +47,37 @@ public class GameMgr : MonoBehaviour
         dailyItemListArr = new List<Item>[3] { day1Items, day2Items, day3Items };
         fullScreenPassRendererFeature = (FullScreenPassRendererFeature)pc_Renderer.rendererFeatures[0];
         StartDay(1);
+        leaveBtn = Transform.FindAnyObjectByType<Button>();
+        leaveBtn.onClick.AddListener(() => ReturnToStart());
     }
     private void StartDay(int day)
     {
-        if (day > 3) return;
+        if (day > 3)
+        {
+            GameClear();
+            return;
+        }
+
         ItemSpawner.Instance.SpawnDailyItems(day);
         dailyMissionText.GetComponent<TextEffect>().enabled = true;
         inventory = new Inventory(dailyItemListArr[day - 1], day);
         inventoryUI.SetInventory(inventory);
         inventory.OnDailyMissionComplete += DailyMissionComplete;
 
+    }
+
+    private void GameClear()
+    {
+        gameClearCanvas.gameObject.SetActive(true);
+        gameClearBtn.onClick.AddListener(ReturnToStart);
+    }
+    private void ReturnToStart()
+    {
+        PhotonNetwork.Destroy(player);
+        AuthenticationService.Instance.SignOut();
+        AuthenticationService.Instance.ClearSessionToken();
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("StartScene");
     }
     private async void DailyMissionComplete(int day)
     {
@@ -113,9 +142,26 @@ public class GameMgr : MonoBehaviour
 
     private IEnumerator ColorEffectCoroutine(ColorAdjustments colorAdjustments, TaskCompletionSource<bool> tcs)
     {
-        yield return new WaitForSeconds(2);
+        float duration = 2.0f;
+        float elapsed = 0f;
+        while (elapsed < duration / 2)
+        {
+            colorAdjustments.postExposure.value = Mathf.Lerp(0, -10, elapsed / (duration / 2)); // Adjust range as necessary
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        elapsed = 0f;
+
+        while (elapsed < duration / 2)
+        {
+            colorAdjustments.postExposure.value = Mathf.Lerp(-10, 0, elapsed / (duration / 2)); // Adjust range as necessary
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
         tcs.SetResult(true);
     }
+
     public Inventory GetInventoryOrigin()
     {
         return this.inventory;

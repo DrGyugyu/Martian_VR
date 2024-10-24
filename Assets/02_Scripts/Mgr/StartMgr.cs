@@ -24,6 +24,8 @@ public class StartMgr : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private TMP_Text dailyMissionText;
     [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField] private Canvas gameClearCanvas;
+    [SerializeField] private Button gameClearBtn;
     private Volume volume;
     private ColorAdjustments colorAdjustments;
     private bool isRed;
@@ -65,6 +67,9 @@ public class StartMgr : MonoBehaviour
         GameMgr.inventoryUI = inventoryUI;
         GameMgr.camera = camera;
         GameMgr.colorAdjustments = colorAdjustments;
+        GameMgr.player = player;
+        GameMgr.gameClearCanvas = gameClearCanvas;
+        GameMgr.gameClearBtn = gameClearBtn;
     }
     private IEnumerator FlashScreen()
     {
@@ -101,5 +106,9 @@ public class StartMgr : MonoBehaviour
         {
             PhotonNetwork.LoadLevel("MarsScene");
         }
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
