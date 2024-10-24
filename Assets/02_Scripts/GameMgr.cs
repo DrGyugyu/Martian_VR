@@ -15,10 +15,10 @@ public class GameMgr : MonoBehaviour
     private FullScreenPassRendererFeature fullScreenPassRendererFeature;
     private Vignette vignette;
     private ColorAdjustments colorAdjustments;
-    [SerializeField] private Canvas canvas;
-    [SerializeField] private TMP_Text dailyMissionText;
+    //[SerializeField] private Canvas canvas;
+    public static TMP_Text dailyMissionText;
     private Inventory inventory;
-    [SerializeField] private InventoryUI inventoryUI;
+    public static InventoryUI inventoryUI;
     [SerializeField] private List<Item> day1Items;
     [SerializeField] private List<Item> day2Items;
     [SerializeField] private List<Item> day3Items;
@@ -37,12 +37,14 @@ public class GameMgr : MonoBehaviour
         playerCharacterCtrl.enabled = true;
         dailyItemListArr = new List<Item>[3] { day1Items, day2Items, day3Items };
         fullScreenPassRendererFeature = (FullScreenPassRendererFeature)pc_Renderer.rendererFeatures[0];
+        StartDay(1);
     }
     public void StartDay(int day)
     {
         if (day > 3) return;
-        ItemSpawner.Instance.SpawnDailyItems(day);
+        dailyMissionText.text = $"Day {day.ToString()} Mission\nCollect:";
         dailyMissionText.GetComponent<TextEffect>().enabled = true;
+        ItemSpawner.Instance.SpawnDailyItems(day);
         inventory = new Inventory(dailyItemListArr[day - 1], day);
         inventoryUI.SetInventory(inventory);
         inventory.OnDailyMissionComplete += DailyMissionComplete;
