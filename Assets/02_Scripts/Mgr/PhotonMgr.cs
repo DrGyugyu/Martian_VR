@@ -4,9 +4,11 @@ using Unity.Services.Core;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Composites;
+using UnityEngine.UI;
 
 public class PhotonMgr : MonoBehaviourPunCallbacks
 {
+    [SerializeField] private Button startBtn;
     public static PhotonMgr Instance;
     private void Awake()
     {
@@ -21,6 +23,8 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
     }
     public override void OnConnectedToMaster()
     {
+        Debug.Log("Joined");
+        startBtn.transform.localScale = 2 * Vector3.one;
         PhotonNetwork.JoinRandomOrCreateRoom(null, 3);
     }
 }

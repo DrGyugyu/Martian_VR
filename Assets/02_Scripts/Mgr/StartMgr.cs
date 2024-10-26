@@ -62,6 +62,7 @@ public class StartMgr : MonoBehaviour
             this.colorAdjustments = colorAdjustments;
         }
         StartCoroutine(FlashScreen());
+
         GameMgr.playerCharacterCtrl = characterController;
         GameMgr.dailyMissionText = dailyMissionText;
         GameMgr.inventoryUI = inventoryUI;

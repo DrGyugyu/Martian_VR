@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 [Serializable]
 public struct Item
@@ -19,7 +21,15 @@ public struct Item
     }
     public override string ToString()
     {
-        return itemSO.itemName;
+        StackTrace stackTrace = new StackTrace();
+        StackFrame[] frames = stackTrace.GetFrames();
+
+        if (frames.Any(frame => frame.GetMethod()?.DeclaringType?.Name == "GameMgr"))
+        {
+            return $"{itemSO.itemName} {amount}";
+        }
+
+        else return itemSO.itemName;
     }
 }
 public enum ItemType

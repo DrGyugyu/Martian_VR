@@ -221,6 +221,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &36198566
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36198550}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &242122034 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1210505617414970, guid: 1818e1a170ef94c3aacee2ba50057521, type: 3}
@@ -275,6 +298,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1545966135082735175, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      propertyPath: dailyMissionText
+      value: 
+      objectReference: {fileID: 252442426}
+    - target: {fileID: 1545966135082735175, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
       propertyPath: playerMaterials.Array.size
       value: 9
       objectReference: {fileID: 0}
@@ -314,6 +341,18 @@ PrefabInstance:
       propertyPath: 'playerMaterials.Array.data[8]'
       value: 
       objectReference: {fileID: 2100000, guid: 64dbb0617cbd3bd458b4741cc78fd0e9, type: 2}
+    - target: {fileID: 2132813546009041205, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132813546009041205, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132813546009041205, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639023198140041430, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -326,8 +365,36 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3121022908668898786, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      propertyPath: m_text
+      value: DailyText
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121022908668898786, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 620831d3059a9784b859f0bbd7f3da76, type: 2}
+    - target: {fileID: 3121022908668898786, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121022908668898786, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121022908668898786, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.051037073
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121022908668898786, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3526728437644871639, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3874503610357616804, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4412414657190056325, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
@@ -370,9 +437,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4412414657190056325, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
       insertIndex: -1
       addedObject: {fileID: 36198558}
-    - targetCorrespondingSourceObject: {fileID: 3330293509311603576, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 4412414657190056325, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 0}
+      addedObject: {fileID: 36198566}
+    - targetCorrespondingSourceObject: {fileID: 5403600657616336766, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 323933893}
   m_SourcePrefab: {fileID: 100100000, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
 --- !u!114 &252442425 stripped
 MonoBehaviour:
@@ -390,7 +460,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3121022908668898786, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
   m_PrefabInstance: {fileID: 252442424}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 323933889}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -411,6 +481,24 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7892124420277494570, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
   m_PrefabInstance: {fileID: 252442424}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &323933889 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5403600657616336766, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
+  m_PrefabInstance: {fileID: 252442424}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &323933893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323933889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19f3ef91de935b4a990db8ef47124a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dailyMissionTxt: {fileID: 252442426}
 --- !u!1 &402810389 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7627627456550896347, guid: 3ca42d0373742e8d6bad3469600ca253, type: 3}
@@ -702,6 +790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0df1f99f0dd17243a06e14df6ec6830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startBtn: {fileID: 781519565}
 --- !u!4 &950416344
 Transform:
   m_ObjectHideFlags: 0
@@ -789,7 +878,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4283716692
-  m_fontColor: {r: 0.32941177, g: 0.32941177, b: 0.32941177, a: 1}
+  m_fontColor: {r: 1, g: 0.9365208, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

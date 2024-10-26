@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,6 +20,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private InventoryUI inventoryUI;
     [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
     [SerializeField] private Material[] playerMaterials;
+
     private void OnEnable()
     {
         XRMoveAction.action.performed += (ctx) =>

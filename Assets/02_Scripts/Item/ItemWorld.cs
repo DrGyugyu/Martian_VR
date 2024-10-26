@@ -16,7 +16,7 @@ public class ItemWorld : MonoBehaviour
     public void SetItem(Item item)
     {
         this.item = item;
-        itemText.SetText(item.ToString() + " : " + item.amount.ToString());
+        itemText.SetText(item.ToString());
     }
     public Item GetItem()
     {

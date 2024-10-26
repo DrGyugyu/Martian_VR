@@ -18,16 +18,15 @@ public class ItemSpawner : MonoBehaviour
         {
             Instance = this;
         }
+        dailySpawnItemListArr = new List<Item>[3] { day1SpawnItemList, day2SpawnItemList, day3SpawnItemList };
     }
     private void Start()
     {
-        dailySpawnItemListArr = new List<Item>[3] { day1SpawnItemList, day2SpawnItemList, day3SpawnItemList };
-        Debug.Log(dailySpawnItemListArr.Length);
+
     }
     public void SpawnDailyItems(int day)
     {
         ShuffleTrArray(spawnLocTr);
-        Debug.Log(day);//+ dailySpawnItemListArr[day - 1].Count);
         for (int i = 0; i < dailySpawnItemListArr[day - 1].Count; i++)
         {
             ItemWorld.SpawnItemWorld(spawnLocTr[i].position, dailySpawnItemListArr[day - 1][i]);
