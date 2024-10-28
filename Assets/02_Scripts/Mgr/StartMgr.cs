@@ -18,12 +18,9 @@ public class StartMgr : MonoBehaviour
     [SerializeField] private float flashSpeed = 1.0f;
     [SerializeField] private GameObject particalSystem;
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject playerVisual;
     [SerializeField] private GameObject StartCanvas;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Camera camera;
-    [SerializeField] private TMP_Text dailyMissionText;
-    [SerializeField] private InventoryUI inventoryUI;
     [SerializeField] private Canvas gameClearCanvas;
     [SerializeField] private Button gameClearBtn;
     private Volume volume;
@@ -64,8 +61,7 @@ public class StartMgr : MonoBehaviour
         StartCoroutine(FlashScreen());
 
         GameMgr.playerCharacterCtrl = characterController;
-        GameMgr.dailyMissionText = dailyMissionText;
-        GameMgr.inventoryUI = inventoryUI;
+
         GameMgr.camera = camera;
         GameMgr.colorAdjustments = colorAdjustments;
         GameMgr.player = player;
@@ -94,13 +90,11 @@ public class StartMgr : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-
         StopCoroutine(FlashScreen());
         StartCanvas.gameObject.SetActive(false);
-        playerVisual.gameObject.SetActive(true);
+
         player.transform.rotation = Quaternion.identity;
         player.transform.position = Vector3.zero;
-        playerVisual.transform.rotation = Quaternion.identity;
 
         Destroy(cameraRb);
         if (PhotonNetwork.IsMasterClient)

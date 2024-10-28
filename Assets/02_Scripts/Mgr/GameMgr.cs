@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Photon.Pun;
 using TMPro;
@@ -18,7 +19,7 @@ public class GameMgr : MonoBehaviour
     private FullScreenPassRendererFeature fullScreenPassRendererFeature;
     private Vignette vignette;
     public static CharacterController playerCharacterCtrl;
-    public static TMP_Text dailyMissionText;
+    public static string dailyMissionText;
     public static ColorAdjustments colorAdjustments;
     private Inventory inventory;
     public static InventoryUI inventoryUI;
@@ -27,27 +28,26 @@ public class GameMgr : MonoBehaviour
     [SerializeField] private List<Item> day2Items;
     [SerializeField] private List<Item> day3Items;
     private List<Item>[] dailyItemListArr;
+    private Button leaveBtn;
     public static Canvas gameClearCanvas;
     public static Button gameClearBtn;
-    private Button leaveBtn;
     public static GameMgr Instance;
+    public static PlayerVisual playerVisual;
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(this);
         else
         {
             Instance = this;
-            DontDestroyOnLoad(Instance);
+            //DontDestroyOnLoad(Instance);
         }
         colorAdjustments.colorFilter.value = Color.white;
+        playerCharacterCtrl.enabled = true;
     }
     private void Start()
     {
         dailyItemListArr = new List<Item>[3] { day1Items, day2Items, day3Items };
         fullScreenPassRendererFeature = (FullScreenPassRendererFeature)pc_Renderer.rendererFeatures[0];
-        //dailyMissionText = GameObject.Find("Txt-DailyMission").GetComponent<TMP_Text>();
-        leaveBtn = GameObject.Find("Btn-Leave").GetComponent<Button>();
-        leaveBtn.onClick.AddListener(() => ReturnToStart());
     }
     public void StartDay(int day)
     {
@@ -58,25 +58,25 @@ public class GameMgr : MonoBehaviour
         }
         playerCharacterCtrl.enabled = true;
         ItemSpawner.Instance.SpawnDailyItems(day);
-        dailyMissionText.text = $"Day {day.ToString()} Task\nCollect: {dailyItemListArr[day - 1].ToString()}";
-        dailyMissionText.GetComponent<TextEffect>().enabled = true;
+        string dailyItems = string.Join(", ", dailyItemListArr[day - 1].Select(item => item.ToString()));
+        string taskMessage = $"Day {day} Task\nCollect: {dailyItems}";
+        playerVisual.DailyMissionTxt();
         inventory = new Inventory(dailyItemListArr[day - 1], day);
         inventoryUI.SetInventory(inventory);
         inventory.OnDailyMissionComplete += DailyMissionComplete;
-
     }
-
     private void GameClear()
     {
         gameClearCanvas.gameObject.SetActive(true);
         gameClearBtn.onClick.AddListener(ReturnToStart);
     }
-    private void ReturnToStart()
+    public void ReturnToStart()
     {
         PhotonNetwork.Destroy(player);
         AuthenticationService.Instance.SignOut();
         AuthenticationService.Instance.ClearSessionToken();
         PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
         SceneManager.LoadScene("StartScene");
     }
     private async void DailyMissionComplete(int day)
@@ -84,7 +84,7 @@ public class GameMgr : MonoBehaviour
         playerCharacterCtrl.enabled = false;
         inventory.OnDailyMissionComplete -= DailyMissionComplete;
         inventory = null;
-        dailyMissionText.GetComponent<TextEffect>().enabled = false;
+        playerVisual.dailyMissionText.GetComponent<TextEffect>().enabled = false;
         ItemSpawner.Instance.DestroyAllItems();
         await Intermission();
         StartDay(day + 1);

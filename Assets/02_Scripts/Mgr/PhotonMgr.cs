@@ -1,10 +1,7 @@
 using Photon.Pun;
-using Photon.Realtime;
-using Unity.Services.Core;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.Composites;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PhotonMgr : MonoBehaviourPunCallbacks
 {
@@ -12,12 +9,17 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
     public static PhotonMgr Instance;
     private void Awake()
     {
+        if (Instance != null && Instance != this) Destroy(this);
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(Instance);
+        }
         PhotonNetwork.GameVersion = "1.0";
-        Instance = this;
     }
     private void Start()
     {
-        PhotonNetwork.NickName = Unity.Services.Authentication.AuthenticationService.Instance.PlayerId;
+        PhotonNetwork.NickName = Unity.Services.Authentication.AuthenticationService.Instance.PlayerName;
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.AutomaticallySyncScene = true;
     }

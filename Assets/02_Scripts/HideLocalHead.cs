@@ -3,20 +3,10 @@ using UnityEngine;
 
 public class HideLocalHead : MonoBehaviour
 {
-    [SerializeField] private Transform localHead;
+
     private void Awake()
     {
 
     }
-    private void Start()
-    {
-        PhotonView photonView = GetComponent<PhotonView>();
-        if (photonView.IsMine)
-        {
-            if (localHead != null)
-            {
-                localHead.localScale = Vector3.zero;
-            }
-        }
-    }
+
 }

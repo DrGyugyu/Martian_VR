@@ -26,6 +26,12 @@ public class ItemWorld : MonoBehaviour
     {
         PhotonNetwork.Destroy(gameObject);
     }
+
+    private void LateUpdate()
+    {
+        itemText.transform.LookAt(Camera.main.transform.position);
+    }
+
     // public static ItemWorld DropItem(Vector3 playerPos, Item item)
     // {
     //     Vector3 dropPos = playerPos - Vector3.forward;

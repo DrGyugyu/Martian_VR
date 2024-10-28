@@ -26,7 +26,7 @@ public class Inventory
         }
         else itemList.Add(item);
         OnItemListChanged?.Invoke(item);
-        if (itemList.All(missionItem => missionItemList.Any(item => item.GetItemType() == missionItem.GetItemType() && item.amount >= missionItem.amount)))
+        if (missionItemList.All(missionItem => itemList.Any(item => item.GetItemType() == missionItem.GetItemType() && item.amount >= missionItem.amount)))
         {
             OnDailyMissionComplete?.Invoke(day);
         }
