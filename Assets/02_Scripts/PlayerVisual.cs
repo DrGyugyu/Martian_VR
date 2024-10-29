@@ -2,9 +2,11 @@ using System;
 using System.Threading.Tasks;
 using Photon.Pun;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Locomotion;
 
 public class PlayerVisual : MonoBehaviour
 {
@@ -63,11 +65,27 @@ public class PlayerVisual : MonoBehaviour
         GameMgr.playerVisual = this;
         GameMgr.inventoryUI = inventoryUI;
 
+
+
         materialIndex = UnityEngine.Random.Range(0, playerMaterials.Length);
         skinnedMeshRenderer.material = playerMaterials[materialIndex];
         photonView.RPC("SetMaterial", RpcTarget.AllBuffered, materialIndex);
         photonView.RPC("SetPlayerName", RpcTarget.AllBuffered, PhotonNetwork.NickName);
         photonView.RPC("HidePlayerCanvas", RpcTarget.AllBuffered);
+        GameMgr.Instance.StartDay(1);
+    }
+    private void Update()
+    {
+        transform.position = new Vector3(
+            player.transform.position.x,
+            transform.position.y,
+            player.transform.position.z
+        );
+        transform.eulerAngles = new Vector3(
+            transform.eulerAngles.x,
+            Camera.main.transform.eulerAngles.y,
+            transform.eulerAngles.z
+        );
     }
     private void LateUpdate()
     {
@@ -77,7 +95,7 @@ public class PlayerVisual : MonoBehaviour
     public void SetPlayerVisual()
     {
         player = FindAnyObjectByType<PlayerCtrl>();
-        transform.SetParent(player.transform);
+
 
         leftHandTarget = player.GetComponent<PlayerCtrl>().leftHandTarget;
         rightHandTarget = player.GetComponent<PlayerCtrl>().rightHandTarget;

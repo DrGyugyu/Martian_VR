@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 using Photon.Pun;
@@ -13,12 +14,11 @@ using UnityEngine.UI;
 
 public class StartMgr : MonoBehaviour
 {
-    [SerializeField] private Rigidbody cameraRb;
     [SerializeField] private Button startBtn;
     [SerializeField] private float flashSpeed = 1.0f;
     [SerializeField] private GameObject particalSystem;
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject StartCanvas;
+    [SerializeField] private GameObject[] StartingObj;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Camera camera;
     [SerializeField] private Canvas gameClearCanvas;
@@ -29,30 +29,24 @@ public class StartMgr : MonoBehaviour
     private async void Awake()
     {
         await UnityServices.InitializeAsync();
+        await AnonymousSignInAsync();
     }
     private void OnEnable()
     {
         startBtn.onClick.AddListener(async () =>
         {
-            cameraRb.useGravity = true;
-            particalSystem.gameObject.SetActive(true);
-            startBtn.gameObject.transform.localScale = Vector3.zero;
-            await AnonymousSignInAsync();
+            CrashLanding();
         });
     }
     private void OnDisable()
     {
         startBtn.onClick.RemoveListener(async () =>
         {
-            cameraRb.useGravity = true;
-            particalSystem.gameObject.SetActive(true);
-            startBtn.gameObject.transform.localScale = Vector3.zero;
-            await AnonymousSignInAsync();
+            CrashLanding();
         });
     }
     void Start()
     {
-        cameraRb.useGravity = false;
         Volume volume = camera.GetComponent<Volume>();
         if (volume.profile.TryGet(out ColorAdjustments colorAdjustments))
         {
@@ -68,6 +62,37 @@ public class StartMgr : MonoBehaviour
         GameMgr.gameClearCanvas = gameClearCanvas;
         GameMgr.gameClearBtn = gameClearBtn;
     }
+    private void CrashLanding()
+    {
+        particalSystem.gameObject.SetActive(true);
+        startBtn.gameObject.transform.localScale = Vector3.zero;
+        StartCoroutine(MoveToPlayer());
+    }
+
+    private IEnumerator MoveToPlayer()
+    {
+        float duration = 1.0f; // Duration of the movement
+        float elapsedTime = 0.0f;
+
+        Vector3 startPosition = particalSystem.transform.position;
+        Vector3 targetPosition = player.transform.position;
+
+        while (elapsedTime < duration)
+        {
+            // Lerp the particle system's position towards the player's position
+            this.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the particle system reaches the player's position
+        particalSystem.transform.position = targetPosition;
+
+        // Deactivate the particle system after it has reached the player
+        particalSystem.gameObject.SetActive(false);
+    }
+
     private IEnumerator FlashScreen()
     {
         while (true)
@@ -91,12 +116,13 @@ public class StartMgr : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         StopCoroutine(FlashScreen());
-        StartCanvas.gameObject.SetActive(false);
+        foreach (GameObject gameObject in StartingObj)
+        {
+            gameObject.SetActive(false);
+        }
 
         player.transform.rotation = Quaternion.identity;
-        player.transform.position = Vector3.zero;
 
-        Destroy(cameraRb);
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.LoadLevel("MarsScene");

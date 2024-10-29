@@ -275,37 +275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 7748112125328834633}
-  animator: {fileID: 2311089553390553162}
-  playerVisual: {fileID: 3982508758037022154}
-  grabTranform: {fileID: 5804477001729417381}
-  rightHandInteractor: {fileID: 4706404329661448168}
-  XRMoveAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: XR Move
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: b0611f0b-c689-4f61-af59-8f83e83ee759
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  XRGrabAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: XR Grab
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: bfb12294-1fe7-47e4-8fcf-e80a1a7ae617
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 15759602096507913, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  inventoryUI: {fileID: 2401586882587555850}
-  skinnedMeshRenderer: {fileID: 3070107958723938144}
-  playerMaterials: []
+  leftHandTarget: {fileID: 0}
+  rightHandTarget: {fileID: 0}
 --- !u!54 &2843130351505913646
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -829,6 +800,7 @@ MonoBehaviour:
   m_HitDetectionType: 0
   m_SphereCastRadius: 0.1
   m_ConeCastAngle: 6
+  m_LiveConeCastDebugVisuals: 0
   m_RaycastMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -2360,6 +2332,7 @@ MonoBehaviour:
   m_HitDetectionType: 0
   m_SphereCastRadius: 0.1
   m_ConeCastAngle: 6
+  m_LiveConeCastDebugVisuals: 0
   m_RaycastMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -3125,34 +3098,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85bf0f37411c75131ad1d39c5a201e7d, type: 3}
---- !u!95 &2311089553390553162 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5149208288229159739, guid: 85bf0f37411c75131ad1d39c5a201e7d, type: 3}
-  m_PrefabInstance: {fileID: 7450935225218022257}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2401586882587555850 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5058435837382804347, guid: 85bf0f37411c75131ad1d39c5a201e7d, type: 3}
-  m_PrefabInstance: {fileID: 7450935225218022257}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ea9e271e4cc9ffdd838528ee1c0b05f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!137 &3070107958723938144 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5619433437921786897, guid: 85bf0f37411c75131ad1d39c5a201e7d, type: 3}
-  m_PrefabInstance: {fileID: 7450935225218022257}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3982508758037022154 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5774666410298801851, guid: 85bf0f37411c75131ad1d39c5a201e7d, type: 3}
-  m_PrefabInstance: {fileID: 7450935225218022257}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5804477001729417381 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4029225266278636500, guid: 85bf0f37411c75131ad1d39c5a201e7d, type: 3}
   m_PrefabInstance: {fileID: 7450935225218022257}
   m_PrefabAsset: {fileID: 0}
