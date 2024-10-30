@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SolarPanel
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: SolarPanelItem
+  itemName: SolarPanel
   itemSprite: {fileID: 21300000, guid: 241dbf7beaf2bc04eb6ce96b1c7f6c60, type: 3}
   itemObj: {fileID: 8737555423496696865, guid: cf7af717ae9a00dd3bd4462f850756f0, type: 3}

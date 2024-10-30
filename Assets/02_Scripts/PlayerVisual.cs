@@ -52,7 +52,7 @@ public class PlayerVisual : MonoBehaviour
             animator.SetFloat(hashMovement, 0);
         };
     }
-    private void Start()
+    private async void Start()
     {
         PhotonView photonView = GetComponent<PhotonView>();
         if (photonView.IsMine)
@@ -72,7 +72,6 @@ public class PlayerVisual : MonoBehaviour
         photonView.RPC("SetMaterial", RpcTarget.AllBuffered, materialIndex);
         photonView.RPC("SetPlayerName", RpcTarget.AllBuffered, PhotonNetwork.NickName);
         photonView.RPC("HidePlayerCanvas", RpcTarget.AllBuffered);
-        GameMgr.Instance.StartDay(1);
     }
     private void Update()
     {
@@ -106,10 +105,13 @@ public class PlayerVisual : MonoBehaviour
         rigBuilder.Build();
         rigBuilder.enabled = true;
     }
-    public void DailyMissionTxt()
+    public void DailyMissionTxt(string txt)
     {
-        dailyMissionText.text = GameMgr.dailyMissionText;
-        dailyMissionText.GetComponent<TextEffect>().enabled = true;
+        Debug.Log(txt);
+        dailyMissionText.text = txt;
+        TextEffect textEffect = dailyMissionText.GetComponent<TextEffect>();
+        textEffect.SetNewText(txt);  // Set the new text before enabling
+        textEffect.enabled = true;
     }
     [PunRPC]
     private void SetMaterial(int index)

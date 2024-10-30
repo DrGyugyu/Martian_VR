@@ -19,10 +19,18 @@ public class PlayerCtrl : MonoBehaviour
     public Transform rightHandTarget;
     private XRBodyTransformer xRBodyTransformer;
     private CustomBodyPositionEvaluator customBodyPositionEvaluator;
+    public static PlayerCtrl Instance;
     private void Awake()
     {
+        if (Instance != null && Instance != this) Destroy(this);
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(Instance);
+        }
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -58,6 +66,8 @@ public class PlayerCtrl : MonoBehaviour
         if (scene.name == "MarsScene")
         {
             PlayerVisualInit();
+            await Task.Delay(2000);
+            GameMgr.Instance.StartDay(1);
         }
     }
     private void PlayerVisualInit()

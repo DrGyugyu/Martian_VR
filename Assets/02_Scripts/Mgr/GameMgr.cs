@@ -59,8 +59,8 @@ public class GameMgr : MonoBehaviour
         playerCharacterCtrl.enabled = true;
         ItemSpawner.Instance.SpawnDailyItems(day);
         string dailyItems = string.Join(", ", dailyItemListArr[day - 1].Select(item => item.ToString()));
-        string taskMessage = $"Day {day} Task\nCollect: {dailyItems}";
-        playerVisual.DailyMissionTxt();
+        string dailyMissionText = $"Day {day} Task\nCollect: {dailyItems}";
+        playerVisual.DailyMissionTxt(dailyMissionText);
         inventory = new Inventory(dailyItemListArr[day - 1], day);
         inventoryUI.SetInventory(inventory);
         inventory.OnDailyMissionComplete += DailyMissionComplete;
@@ -68,6 +68,7 @@ public class GameMgr : MonoBehaviour
     private void GameClear()
     {
         gameClearCanvas.gameObject.SetActive(true);
+        Destroy(playerVisual);
         gameClearBtn.onClick.AddListener(ReturnToStart);
     }
     public void ReturnToStart()

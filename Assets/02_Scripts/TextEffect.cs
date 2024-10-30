@@ -23,7 +23,11 @@ public class TextEffect : MonoBehaviour
             writer = tmpProText.text;
         }
     }
-
+    public void SetNewText(string newText)
+    {
+        writer = newText;
+        StartTypewriter();
+    }
     void Start()
     {
         if (tmpProText != null)
