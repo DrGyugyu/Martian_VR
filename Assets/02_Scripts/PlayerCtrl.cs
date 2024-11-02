@@ -10,8 +10,6 @@ public class PlayerCtrl : MonoBehaviour
     private InventoryUI inventoryUI;
     public Transform leftHandTarget;
     public Transform rightHandTarget;
-    [HideInInspector] public GameObject networkLeftHandTarget;
-    [HideInInspector] public GameObject networkRightHandTarget;
     public static PlayerCtrl Instance;
     [SerializeField] private GameObject[] StartingObj;
 
@@ -31,11 +29,6 @@ public class PlayerCtrl : MonoBehaviour
             Vector3 rotation = playerVisual.transform.rotation.eulerAngles;
             rotation.y = camera.transform.rotation.eulerAngles.y;
             playerVisual.transform.rotation = Quaternion.Euler(rotation);
-        }
-        if (networkLeftHandTarget != null && networkRightHandTarget != null)
-        {
-            networkLeftHandTarget.transform.position = leftHandTarget.position;
-            networkRightHandTarget.transform.position = rightHandTarget.position;
         }
     }
     private void AddToInventory(ItemWorld itemWorld)
@@ -68,8 +61,6 @@ public class PlayerCtrl : MonoBehaviour
     private void PlayerVisualInit()
     {
         playerVisual = PhotonNetwork.Instantiate("PlayerVisual", Vector3.zero, Quaternion.identity);
-        networkLeftHandTarget = PhotonNetwork.Instantiate("LeftHandTarget", leftHandTarget.transform.position, Quaternion.identity);
-        networkRightHandTarget = PhotonNetwork.Instantiate("RightHandTarget", rightHandTarget.transform.position, Quaternion.identity);
         playerVisual?.GetComponent<PlayerVisual>().onPlayerVisualInit?.Invoke();
     }
     private void OnDestroy()

@@ -103,19 +103,6 @@ public class PlayerVisual : MonoBehaviour
         rigBuilder.enabled = false;
         rigBuilder.Build();
         rigBuilder.enabled = true;
-        photonView.RPC("SetHandTargets", RpcTarget.AllBuffered);
-    }
-    [PunRPC]
-    public void SetHandTargets()
-    {
-        leftHandAim.data.target = player.networkLeftHandTarget.transform;
-        rightHandAim.data.target = player.networkRightHandTarget.transform;
-
-        // Rebuild the rig to apply the new targets
-        RigBuilder rigBuilder = GetComponent<RigBuilder>();
-        rigBuilder.enabled = false;
-        rigBuilder.Build();
-        rigBuilder.enabled = true;
     }
     public void DailyMissionTxt(string txt)
     {
