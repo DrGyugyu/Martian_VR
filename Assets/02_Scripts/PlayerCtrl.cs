@@ -1,15 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Photon.Pun;
-using TMPro;
-using Unity.Cinemachine;
-using Unity.XR.CoreUtils;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.XR.Interaction.Toolkit.Locomotion;
-
-
 public class PlayerCtrl : MonoBehaviour
 {
     [SerializeField] private Camera camera;
@@ -17,17 +10,13 @@ public class PlayerCtrl : MonoBehaviour
     private InventoryUI inventoryUI;
     public Transform leftHandTarget;
     public Transform rightHandTarget;
-    private XRBodyTransformer xRBodyTransformer;
-    private CustomBodyPositionEvaluator customBodyPositionEvaluator;
+    [HideInInspector] public GameObject networkLeftHandTarget;
+    [HideInInspector] public GameObject networkRightHandTarget;
     public static PlayerCtrl Instance;
+    [SerializeField] private GameObject[] StartingObj;
+
     private void Awake()
     {
-        if (Instance != null && Instance != this) Destroy(this);
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
-        }
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -43,9 +32,10 @@ public class PlayerCtrl : MonoBehaviour
             rotation.y = camera.transform.rotation.eulerAngles.y;
             playerVisual.transform.rotation = Quaternion.Euler(rotation);
         }
-        if (xRBodyTransformer != null && playerVisual != null)
+        if (networkLeftHandTarget != null && networkRightHandTarget != null)
         {
-            UpdateTransform();
+            networkLeftHandTarget.transform.position = leftHandTarget.position;
+            networkRightHandTarget.transform.position = rightHandTarget.position;
         }
     }
     private void AddToInventory(ItemWorld itemWorld)
@@ -65,6 +55,11 @@ public class PlayerCtrl : MonoBehaviour
 
         if (scene.name == "MarsScene")
         {
+            foreach (GameObject gameObject in StartingObj)
+            {
+                gameObject.SetActive(false);
+            }
+            await Task.Delay(500);
             PlayerVisualInit();
             await Task.Delay(2000);
             GameMgr.Instance.StartDay(1);
@@ -73,52 +68,12 @@ public class PlayerCtrl : MonoBehaviour
     private void PlayerVisualInit()
     {
         playerVisual = PhotonNetwork.Instantiate("PlayerVisual", Vector3.zero, Quaternion.identity);
+        networkLeftHandTarget = PhotonNetwork.Instantiate("LeftHandTarget", leftHandTarget.transform.position, Quaternion.identity);
+        networkRightHandTarget = PhotonNetwork.Instantiate("RightHandTarget", rightHandTarget.transform.position, Quaternion.identity);
         playerVisual?.GetComponent<PlayerVisual>().onPlayerVisualInit?.Invoke();
-    }
-    private void SetupBodyTransformer()
-    {
-        xRBodyTransformer = GetComponent<XRBodyTransformer>();
-        customBodyPositionEvaluator = new CustomBodyPositionEvaluator(playerVisual.transform);
-        xRBodyTransformer.bodyPositionEvaluator = customBodyPositionEvaluator;
-    }
-    private void UpdateTransform()
-    {
-        transform.position = playerVisual.transform.position;
-        transform.rotation = playerVisual.transform.rotation;
     }
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-}
-public class CustomBodyPositionEvaluator : IXRBodyPositionEvaluator
-{
-    private Transform visualTransform;
-
-    public CustomBodyPositionEvaluator(Transform visual)
-    {
-        visualTransform = visual;
-    }
-
-    public Vector3 GetBodyGroundLocalPosition(float characterHeight, Transform origin)
-    {
-        if (visualTransform == null)
-            return Vector3.zero;
-
-        // Get the position of the PlayerVisual
-        Vector3 visualPosition = visualTransform.position;
-
-        // Convert to local space relative to the XR origin
-        Vector3 localPosition = origin.InverseTransformPoint(visualPosition);
-
-        // You might want to adjust the Y position based on your needs
-        // localPosition.y = 0; // If you want to keep it grounded
-
-        return localPosition;
-    }
-
-    public Vector3 GetBodyGroundLocalPosition(XROrigin xrOrigin)
-    {
-        throw new NotImplementedException();
     }
 }

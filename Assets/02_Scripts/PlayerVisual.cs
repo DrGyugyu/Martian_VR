@@ -1,12 +1,9 @@
 using System;
-using System.Threading.Tasks;
 using Photon.Pun;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit.Locomotion;
 
 public class PlayerVisual : MonoBehaviour
 {
@@ -27,6 +24,7 @@ public class PlayerVisual : MonoBehaviour
     public TMP_Text dailyMissionText;
     [SerializeField] private InventoryUI inventoryUI;
     [SerializeField] private RectTransform canvas;
+    [SerializeField] private PhotonView photonView;
     private void OnEnable()
     {
         onPlayerVisualInit += SetPlayerVisual;
@@ -54,7 +52,6 @@ public class PlayerVisual : MonoBehaviour
     }
     private async void Start()
     {
-        PhotonView photonView = GetComponent<PhotonView>();
         if (photonView.IsMine)
         {
             if (localHead != null)
@@ -72,19 +69,23 @@ public class PlayerVisual : MonoBehaviour
         photonView.RPC("SetMaterial", RpcTarget.AllBuffered, materialIndex);
         photonView.RPC("SetPlayerName", RpcTarget.AllBuffered, PhotonNetwork.NickName);
         photonView.RPC("HidePlayerCanvas", RpcTarget.AllBuffered);
+
     }
     private void Update()
     {
-        transform.position = new Vector3(
-            player.transform.position.x,
-            transform.position.y,
-            player.transform.position.z
-        );
-        transform.eulerAngles = new Vector3(
-            transform.eulerAngles.x,
-            Camera.main.transform.eulerAngles.y,
-            transform.eulerAngles.z
-        );
+        if (photonView.IsMine)
+        {
+            transform.position = new Vector3(
+                        player.transform.position.x,
+                        transform.position.y,
+                        player.transform.position.z
+                    );
+            transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                Camera.main.transform.eulerAngles.y,
+                transform.eulerAngles.z
+            );
+        }
     }
     private void LateUpdate()
     {
@@ -94,12 +95,23 @@ public class PlayerVisual : MonoBehaviour
     public void SetPlayerVisual()
     {
         player = FindAnyObjectByType<PlayerCtrl>();
-
-
         leftHandTarget = player.GetComponent<PlayerCtrl>().leftHandTarget;
         rightHandTarget = player.GetComponent<PlayerCtrl>().rightHandTarget;
         leftHandAim.data.target = leftHandTarget;
         rightHandAim.data.target = rightHandTarget;
+        RigBuilder rigBuilder = GetComponent<RigBuilder>();
+        rigBuilder.enabled = false;
+        rigBuilder.Build();
+        rigBuilder.enabled = true;
+        photonView.RPC("SetHandTargets", RpcTarget.AllBuffered);
+    }
+    [PunRPC]
+    public void SetHandTargets()
+    {
+        leftHandAim.data.target = player.networkLeftHandTarget.transform;
+        rightHandAim.data.target = player.networkRightHandTarget.transform;
+
+        // Rebuild the rig to apply the new targets
         RigBuilder rigBuilder = GetComponent<RigBuilder>();
         rigBuilder.enabled = false;
         rigBuilder.Build();

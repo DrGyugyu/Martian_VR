@@ -1962,6 +1962,7 @@ GameObject:
   - component: {fileID: 5741528608716020778}
   - component: {fileID: 7582599879018968495}
   - component: {fileID: 2536363595551370863}
+  - component: {fileID: 2177737649082410972}
   m_Layer: 0
   m_Name: PlayerVisual
   m_TagString: Untagged
@@ -2136,6 +2137,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 7582599879018968495}
+  - {fileID: 2177737649082410972}
   - {fileID: 3375576620963044019}
   - {fileID: 1509871073277152322}
   sceneViewId: 0
@@ -2208,6 +2210,23 @@ MonoBehaviour:
   dailyMissionText: {fileID: 5491880058442241683}
   inventoryUI: {fileID: 5058435837382804347}
   canvas: {fileID: 784047743902668891}
+  photonView: {fileID: 5741528608716020778}
+--- !u!114 &2177737649082410972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510799734928239348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &6610128920074262561
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Threading.Tasks;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -40,10 +41,7 @@ public class StartMgr : MonoBehaviour
     }
     private void OnDisable()
     {
-        startBtn.onClick.RemoveListener(async () =>
-        {
-            CrashLanding();
-        });
+        startBtn.onClick.RemoveAllListeners();
     }
     void Start()
     {
@@ -64,6 +62,7 @@ public class StartMgr : MonoBehaviour
     }
     private void CrashLanding()
     {
+        PhotonNetwork.JoinOrCreateRoom(PhotonMgr.ROOM_NAME, PhotonMgr.roomOptions, TypedLobby.Default);
         particalSystem.gameObject.SetActive(true);
         startBtn.gameObject.transform.localScale = Vector3.zero;
         StartCoroutine(MoveToPlayer());
@@ -115,6 +114,7 @@ public class StartMgr : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+
         StopCoroutine(FlashScreen());
         foreach (GameObject gameObject in StartingObj)
         {
@@ -122,7 +122,6 @@ public class StartMgr : MonoBehaviour
         }
 
         player.transform.rotation = Quaternion.identity;
-
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.LoadLevel("MarsScene");
@@ -132,4 +131,5 @@ public class StartMgr : MonoBehaviour
     {
         Application.Quit();
     }
+
 }

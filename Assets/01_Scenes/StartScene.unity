@@ -2278,7 +2278,7 @@ Transform:
   m_GameObject: {fileID: 1956893676}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.48, z: 26.25}
+  m_LocalPosition: {x: 0, y: 2.5, z: 26.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2766,6 +2766,16 @@ MonoBehaviour:
   camera: {fileID: 868252285}
   leftHandTarget: {fileID: 953447756}
   rightHandTarget: {fileID: 1399386800}
+  networkLeftHandTarget: {fileID: 0}
+  networkRightHandTarget: {fileID: 0}
+  StartingObj:
+  - {fileID: 425546448}
+  - {fileID: 3815206083807004654}
+  - {fileID: 8385133657865064386}
+  - {fileID: 6069243019969088259}
+  - {fileID: 6659094311183689313}
+  - {fileID: 7134951713098185425}
+  - {fileID: 715701782}
 --- !u!114 &2111006323
 MonoBehaviour:
   m_ObjectHideFlags: 0
