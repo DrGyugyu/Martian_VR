@@ -15,7 +15,6 @@ public class TextEffect : MonoBehaviour
 
     enum options { clear, complete }
 
-    // Use this for initialization
     void Awake()
     {
         if (tmpProText != null)

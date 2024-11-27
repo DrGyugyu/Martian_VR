@@ -112,21 +112,31 @@ public class StartMgr : MonoBehaviour
             Debug.Log(e.Message);
         }
     }
+    private bool isSceneLoading = false;
+
     private void OnTriggerEnter(Collider other)
     {
+        if (isSceneLoading) return; // Prevent multiple triggers
+        isSceneLoading = true;
 
         StopCoroutine(FlashScreen());
+
+        // Disable starting objects
         foreach (GameObject gameObject in StartingObj)
         {
             gameObject.SetActive(false);
         }
 
+        // Reset player's rotation
         player.transform.rotation = Quaternion.identity;
+
+        // Load the next scene if Master Client
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.LoadLevel("MarsScene");
         }
     }
+
     public void ExitGame()
     {
         Application.Quit();

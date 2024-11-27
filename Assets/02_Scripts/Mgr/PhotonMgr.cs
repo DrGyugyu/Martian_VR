@@ -13,7 +13,7 @@ public class PhotonMgr : MonoBehaviourPunCallbacks
         IsVisible = true,
         IsOpen = true
     };
-    public static string ROOM_NAME = "GameRoom"; // Fixed room name for testing
+    public static string ROOM_NAME = "GameRoom";
 
     private void Awake()
     {
